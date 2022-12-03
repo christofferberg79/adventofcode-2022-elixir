@@ -70,6 +70,21 @@ defmodule Aoc2022 do
     |> Enum.sum()
   end
 
+  defp puzzle3_part1(input) do
+    input
+    |> Enum.map(&String.split_at(&1, div(String.length(&1), 2)))
+    |> Enum.map(fn {s1, s2} ->
+      Enum.find(String.codepoints(s1), fn c -> String.contains?(s2, c) end)
+      |> String.to_charlist()
+      |> Enum.at(0)
+      |> fn
+        i when i in ?a..?z -> i - ?a + 1
+        i when i in ?A..?Z -> i - ?A + 27
+      end.()
+    end)
+    |> Enum.sum()
+  end
+
   def run(path, fun) do
     lines(path) |> fun.() |> IO.puts()
   end
@@ -83,6 +98,8 @@ defmodule Aoc2022 do
     run("input/day2.txt", &puzzle2_part1/1)
     # 12111
     run("input/day2.txt", &puzzle2_part2/1)
+    # 7997
+    run("input/day3.txt", &puzzle3_part1/1)
   end
 end
 
