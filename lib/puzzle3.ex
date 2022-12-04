@@ -13,9 +13,7 @@ defmodule Puzzle3 do
     input
     |> Enum.chunk_every(3)
     |> Enum.map(fn [s1, s2, s3] ->
-      Enum.find(String.codepoints(s1), fn c ->
-        String.contains?(s2, c) and String.contains?(s3, c)
-      end)
+      Enum.find(String.codepoints(s1), fn c -> String.contains?(s2, c) and String.contains?(s3, c) end)
     end)
     |> Enum.map(&prio/1)
     |> Enum.sum()

@@ -1,4 +1,6 @@
 defmodule Puzzle2 do
+  @shape_scores %{"A" => 1, "B" => 2, "C" => 3, "X" => 1, "Y" => 2, "Z" => 3}
+
   def part1(input) do
     parse(input)
     |> Enum.map(fn
@@ -21,16 +23,9 @@ defmodule Puzzle2 do
 
   defp parse(input) do
     input
-    |> Enum.map(fn round ->
-      String.split(round, " ")
-      |> Enum.map(fn
-        "A" -> 1
-        "B" -> 2
-        "C" -> 3
-        "X" -> 1
-        "Y" -> 2
-        "Z" -> 3
-      end)
+    |> Enum.map(fn line ->
+      String.split(line, " ")
+      |> Enum.map(&(@shape_scores[&1]))
     end)
   end
 end
