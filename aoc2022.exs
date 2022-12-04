@@ -115,8 +115,7 @@ defmodule Puzzle4 do
   defp parse(input) do
     input
     |> Enum.map(fn line ->
-      String.split(line, ",")
-      |> Enum.flat_map(&(String.split(&1, "-")))
+      String.split(line, ~r/[,-]/)
       |> Enum.map(&String.to_integer/1)
     end)
   end
