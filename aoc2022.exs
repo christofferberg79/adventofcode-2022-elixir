@@ -101,6 +101,20 @@ defmodule Puzzle3 do
   end
 end
 
+defmodule Puzzle4 do
+  def part1(input) do
+    input
+    |> Enum.map(fn line ->
+      String.split(line, ",")
+      |> Enum.flat_map(&(String.split(&1, "-")))
+      |> Enum.map(&String.to_integer/1)
+    end)
+    |> Enum.count(fn [x1, x2, y1, y2] ->
+      x1 <= y1 and x2 >= y2 or y1 <= x1 and y2 >= x2
+    end)
+  end
+end
+
 defmodule AoC2022 do
   def run(path, fun) do
     Input.lines(path) |> fun.() |> IO.puts()
@@ -119,6 +133,8 @@ defmodule AoC2022 do
     run("input/day3.txt", &Puzzle3.part1/1)
     # 2545
     run("input/day3.txt", &Puzzle3.part2/1)
+    # 466
+    run("input/day4.txt", &Puzzle4.part1/1)
   end
 end
 
